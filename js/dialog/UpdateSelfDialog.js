@@ -16,7 +16,7 @@ UpdateSelfDialog.prototype.logic = function(text, iteration) {
 	   url: "ajax.php?type=UpdateSelfDialog",
 	   dataType : "json",
 	   success: function(msg){
-	   		link.speak("Great, I understand life better, now. T");
+	   		link.speak("Great, I understand life better, now.");
 			link.doneWithDialog();
 	   },
 	   error: function (msg) {
