@@ -107,14 +107,18 @@ Link.prototype.analyze = function(text, forceAttention) {
 		}
 		else if (this.currentDialog == null) {
 			var found = false;
+			var possibilities = new Array();
 
 			for (var i = 0; i < linkDialogs.length; i++) {
 				if (linkDialogs[i].isSameText(text)){	
-					this.currentDialog = linkDialogs[i];
-					this.currentDialog.setUp();
-					found = true;
-					break;
+					possibilities.push(linkDialogs[i]);
 				}
+			}
+
+			if (possibilities.length > 0) {
+				this.currentDialog = possibilities[parseInt(Math.random() * possibilities.length)];
+				this.currentDialog.setUp();
+				found = true;
 			}
 
 			if (!found) {
@@ -144,7 +148,7 @@ Link.prototype.doneWithDialog = function () {
 	if (this.currentDialog != null) {
 		this.currentDialog.tearDown();
 	}
-	
+
 	this.haveAttention = false;
 	this.currentDialog = null;
 	this.dialogIterationNumber = 0;
