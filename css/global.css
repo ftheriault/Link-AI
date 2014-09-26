@@ -16,8 +16,9 @@ body {
 	color: white;
 	opacity: 0.5;
 	overflow-y: auto;
+	overflow-x: hidden;
 	padding-right: 15px;
-	max-height:600px;
+	max-height:95%;
 }
 
 .insideframe {

@@ -19,10 +19,13 @@ BaconDialog.prototype.logic = function(text,iteration) {
 		$(document.body).append('<iframe class="insideframe" id="' + this.id + '" src="https://baconipsum.com/?paras=5&type=all-meat&start-with-lorem=1"></iframe>');
 	}
 	else if ( text.match("^i am d" ) != null || text.match("^im d") !=null){
-		$("#" + this.id).remove();
 		link.speak("Ok, I hope you're full now.");
 		done = true;
 	}
 
 	return done;
+}
+
+BaconDialog.prototype.tearDown = function() {
+	$("#" + this.id).remove();
 }

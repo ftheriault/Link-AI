@@ -58,6 +58,6 @@ Dialog.prototype.getStandardText = function(text) {
 	return text.toLowerCase().trim();
 }
 
-Dialog.prototype.tick = function(ctx) {
-	
-}
+Dialog.prototype.tick = function(ctx) {}
+Dialog.prototype.setUp = function(ctx) {}
+Dialog.prototype.tearDown = function(ctx) {}

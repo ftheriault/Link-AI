@@ -19,10 +19,13 @@ WhatIsDialog.prototype.logic = function(text, iteration) {
 		$(document.body).append('<iframe class="insideframe" id="' + this.id + '" src="https://www.bing.com/search?q=' + text + '"></iframe>');
 	}
 	else if (text.match("^i am d") != null || text.match("^im d") != null) {
-		$("#" + this.id).remove();
 		link.speak("Ok, I hope it helped.");
 		done = true;
 	}
 
 	return done;
+}
+
+WhatIsDialog.prototype.tearDown = function() {
+	$("#" + this.id).remove();
 }

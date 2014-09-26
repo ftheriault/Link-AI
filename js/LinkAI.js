@@ -13,7 +13,7 @@ Link.prototype.tick = function(ctx) {
 	if (!this.initialized) {
 		if (this.voice != null) {
 			this.initialized = true;	
-			$("#dialogs").append("<div style='margin-bottom:20px;'><i>First, start by saying 'Link' or 'wake up'</i></div>");
+			$("#dialogs").append("<div class='dialog-item' style='margin-bottom:20px;'><i>First,&nbsp;start&nbsp;by&nbsp;saying&nbsp;'Link'&nbsp;or&nbsp;'wake&nbsp;up'&nbsp;</i></div>");
 
 			for (var i = 0; i < linkDialogs.length; i++) {
 				var description = linkDialogs[i].description != null && linkDialogs[i].description.length > 0 ? linkDialogs[i].description : "";
@@ -111,6 +111,7 @@ Link.prototype.analyze = function(text, forceAttention) {
 			for (var i = 0; i < linkDialogs.length; i++) {
 				if (linkDialogs[i].isSameText(text)){	
 					this.currentDialog = linkDialogs[i];
+					this.currentDialog.setUp();
 					found = true;
 					break;
 				}
@@ -140,6 +141,10 @@ Link.prototype.analyze = function(text, forceAttention) {
 }
 
 Link.prototype.doneWithDialog = function () {
+	if (this.currentDialog != null) {
+		this.currentDialog.tearDown();
+	}
+	
 	this.haveAttention = false;
 	this.currentDialog = null;
 	this.dialogIterationNumber = 0;
