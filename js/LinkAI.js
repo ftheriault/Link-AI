@@ -163,7 +163,7 @@ Link.prototype.speak = function(text, lang) {
 
 		msg.text = text;
 
-		var length = (text.length > 30 ? text.length * 0.9 : 20.0);
+		var length = (text.length > 30 ? text.length * 2 : 60.0);
 
 		this.spokenMessages.push({
 									text: text, 
