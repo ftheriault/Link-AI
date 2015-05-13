@@ -198,6 +198,7 @@ WebProjectCodeInspectorDialog.prototype.cannotConnect = function() {
 						"<li>Intall node</li>" +
 						"<li>Using git, clone the <a href='https://github.com/ftheriault/LinkFileAccessor' target='_blank'>file accessor program</a>.</li>" +
 						"<li>In a terminal on your computer, run the file accessor program : <strong>node server/main.js</strong></li>" +
+						"<li>Once the program is running, say : I am ready</li>" +
 						"</ol>", false);		
 	});
 }
