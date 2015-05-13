@@ -110,6 +110,16 @@ WebProjectCodeInspectorDialog.prototype.analyzeFiles = function(files) {
 		}
 	};
 
+	// checking the absence of "style attributes" in HTML files
+	for (var i = 0; i < files.length; i++) {
+		if (files[i].scanDepth == depth) {
+			if (files[i].content.toLowerCase().indexOf("style=") != -1) {
+				errors.push("Using of styles attributes in HTML should be done as less as possible.");
+				break;
+			}
+		}
+	};
+
 	if (errors.length == 0) {
 		link.speak("I did not see anything wrong with your project, good job.");
 	}
