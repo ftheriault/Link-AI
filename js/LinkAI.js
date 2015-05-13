@@ -218,13 +218,16 @@ Link.prototype.prompt = function(msg, mustCloseOnClick) {
 	var element = document.createElement("div");
 	element.className = "prompt";
 	element.id = "prompt-" + this.promptCounter++;
-	element.innerHTML = msg;
 
 	if (mustCloseOnClick) {
 		element.onclick = function () {
 			document.body.removeChild(element);
 		}
+
+		msg += "<div class='close-desc'><i>Click to close</i></div>"
 	}
+
+	element.innerHTML = msg;
 	
 	document.body.appendChild(element);
 

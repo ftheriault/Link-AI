@@ -69,13 +69,21 @@ a {
 .prompt {
 	padding:10px;
 	border-radius:4px;
-	width:500px;
+	width:600px;
 	opacity:0.95;
-	min-height:200px;
+	min-height:180px;
 	border:2px solid black;
 	background-color: #bbb;
 	position: absolute;
 	top:10px;
 	left:10px;
 	color:black;
+	padding-bottom: 30px;
+}
+
+.prompt .close-desc {
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	color:#888;
 }
