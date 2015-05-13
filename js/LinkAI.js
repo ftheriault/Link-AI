@@ -7,9 +7,54 @@ function Link(linkVoice) {
 
 	this.initialized = false;
 	this.dialogIterationNumber = 0;
+
+	// Link animation
+	this.drawCounter = 0;
+	this.drawOpacity = 0;
+	this.drawWantedOpacity = 0.3;
+	this.drawGreenLevel = 30;
+	this.drawRedLevel = 30;
+	this.drawBlueLevel = 200;
+	this.squareSize = 300;
 }
 
 Link.prototype.tick = function(ctx) {
+	ctx.save();
+
+	if (this.spokenMessages.length != 0) {
+		this.drawWantedOpacity = 0.8;
+		this.drawCounter += 0.01;
+	}
+	else {
+		this.drawWantedOpacity = 0.3;
+	}
+
+	if (this.drawOpacity < this.drawWantedOpacity) {
+		this.drawOpacity += 0.01;
+	}
+	else if (this.drawOpacity > this.drawWantedOpacity) {
+		this.drawOpacity -= 0.01;	
+	}
+
+	if (this.drawRedLevel > 30) {
+		this.drawRedLevel -= 1;
+	}
+
+	if (this.drawGreenLevel > 30) {
+		this.drawGreenLevel -= 1;
+	}
+
+	if (this.drawBlueLevel < 200) {
+		this.drawBlueLevel += 1;
+	}
+
+	ctx.translate(pageWidth/2, pageHeight/2);
+	ctx.rotate(this.drawCounter);
+
+	ctx.fillStyle = "rgba(" + this.drawRedLevel + ", " + this.drawGreenLevel + ", " + this.drawBlueLevel + ", " + this.drawOpacity + ")";
+	ctx.fillRect(-this.squareSize/2, -this.squareSize/2, this.squareSize, this.squareSize);
+	ctx.restore();
+
 	if (!this.initialized) {
 		if (this.voice != null) {
 			this.initialized = true;	
@@ -48,7 +93,7 @@ Link.prototype.tick = function(ctx) {
 			message.time--;
 		}
 
-		if (message.time <= 0) {
+		if (message.done) {
 			this.spokenMessages.splice(i, 1);
 			i--;
 		}
@@ -172,14 +217,25 @@ Link.prototype.speak = function(text, lang) {
 
 		msg.text = text;
 
-		var length = (text.length > 30 ? text.length * 2 : 60.0);
+		var length = (text.length > 30 ? text.length * 4 : 120.0);
 
-		this.spokenMessages.push({
-									text: text, 
-									time: length,
-									initialTime: length});
+		var spokenMsg = {
+			text: text, 
+			time: length,
+			initialTime: length,
+			done : false
+		}
 
-		speechSynthesis.speak(msg);
+		msg.onend = function () {
+			spokenMsg.done = true;
+		}
+
+		this.spokenMessages.push(spokenMsg);
+
+		setTimeout(function () {
+			speechSynthesis.speak(msg);
+		}, 10)
+		
 	}
 }
 

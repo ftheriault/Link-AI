@@ -3,6 +3,9 @@ var linkVoice = null;
 var linkVoices = null;
 var linkDialogs = [];
 
+var pageWidth = 0;
+var pageHeight = 0;
+
 var speechSynthesisSupport = ('speechSynthesis' in window);
 var speechRecognitionSupport = ('webkitSpeechRecognition' in window);
 
@@ -30,10 +33,12 @@ $( document ).ready(function() {
 
 function tick() {
 	var ctx = document.getElementById("canvas").getContext("2d");
-	ctx.clearRect(0, 0, document.getElementById("canvas").offsetWidth, 
-						document.getElementById("canvas").offsetHeight);
+	pageWidth = document.getElementById("canvas").offsetWidth;
+	pageHeight = document.getElementById("canvas").offsetHeight;
+	ctx.clearRect(0, 0, pageWidth, pageHeight);
 	link.tick(ctx);
-	setTimeout(tick, 50);
+
+	window.requestAnimationFrame(tick);
 }
 
 function showManualInput() {
