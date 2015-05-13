@@ -7,6 +7,7 @@ function Link(linkVoice) {
 
 	this.initialized = false;
 	this.dialogIterationNumber = 0;
+	this.promptCounter = 0;
 
 	// Link animation
 	this.drawCounter = 0;
@@ -17,6 +18,20 @@ function Link(linkVoice) {
 	this.drawBlueLevel = 200;
 	this.squareSize = 300;
 }
+
+Link.prototype.updateColorLevel = function(red, green, blue) {
+	if (red != null) {
+		this.drawRedLevel = red;
+	}
+
+	if (green != null) {
+		this.drawGreenLevel = green;	
+	}
+
+	if (blue != null) {
+		this.drawBlueLevel = blue;	
+	}
+};
 
 Link.prototype.tick = function(ctx) {
 	ctx.save();
@@ -199,7 +214,24 @@ Link.prototype.doneWithDialog = function () {
 	this.dialogIterationNumber = 0;
 }
 
-Link.prototype.speak = function(text, lang) {	
+Link.prototype.prompt = function(msg, mustCloseOnClick) {
+	var element = document.createElement("div");
+	element.className = "prompt";
+	element.id = "prompt-" + this.promptCounter++;
+	element.innerHTML = msg;
+
+	if (mustCloseOnClick) {
+		element.onclick = function () {
+			document.body.removeChild(element);
+		}
+	}
+	
+	document.body.appendChild(element);
+
+	return element.id;
+}
+
+Link.prototype.speak = function(text, lang, callback) {	
 	if (this.voice != null) {
 		var msg = new SpeechSynthesisUtterance();
 		msg.voice = this.voice; 
@@ -228,6 +260,10 @@ Link.prototype.speak = function(text, lang) {
 
 		msg.onend = function () {
 			spokenMsg.done = true;
+
+			if (callback != null) {
+				callback();
+			}
 		}
 
 		this.spokenMessages.push(spokenMsg);
