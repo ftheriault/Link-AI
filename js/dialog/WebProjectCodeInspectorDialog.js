@@ -100,7 +100,7 @@ WebProjectCodeInspectorDialog.prototype.analyzeFiles = function(files) {
 		}
 	};
 
-	// checking the absence of calls and references in view files
+	// checking the absence of calls and references to the DAOs in view files
 	for (var i = 0; i < files.length; i++) {
 		if (files[i].scanDepth == depth) {
 			if (files[i].content.toLowerCase().indexOf("dao") != -1) {
