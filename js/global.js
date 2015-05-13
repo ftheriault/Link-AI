@@ -7,7 +7,7 @@ var pageWidth = 0;
 var pageHeight = 0;
 
 var speechSynthesisSupport = ('speechSynthesis' in window);
-var speechRecognitionSupport = ('webkitSpeechRecognition' in window);
+var speechRecognitionSupport = location.protocol === 'https:' && ('webkitSpeechRecognition' in window);
 
 $( document ).ready(function() {
 
