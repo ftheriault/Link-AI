@@ -63,7 +63,9 @@ Link.prototype.tick = function(ctx) {
 		this.drawBlueLevel += 1;
 	}
 
-	ctx.translate(pageWidth/2, pageHeight/2);
+	if (pageWidth != null) {
+		ctx.translate(pageWidth/2, pageHeight/2);
+	}
 	ctx.rotate(this.drawCounter);
 
 	ctx.fillStyle = "rgba(" + this.drawRedLevel + ", " + this.drawGreenLevel + ", " + this.drawBlueLevel + ", " + this.drawOpacity + ")";
