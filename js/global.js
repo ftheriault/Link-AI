@@ -82,7 +82,6 @@ if (speechSynthesisSupport) {
 		linkVoice = linkVoices[2];		
 
 		if (link != null) {
-			console.log(linkVoice)
 			link.voice = linkVoice;
 		}
 	}
