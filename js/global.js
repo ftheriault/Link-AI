@@ -79,7 +79,7 @@ else {
 if (speechSynthesisSupport) {
 	window.speechSynthesis.onvoiceschanged = function() {
 		linkVoices = window.speechSynthesis.getVoices();
-		linkVoice = linkVoices[2];		
+		linkVoice = linkVoices[5];		
 
 		if (link != null) {
 			link.voice = linkVoice;
