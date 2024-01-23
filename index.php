@@ -32,5 +32,6 @@
 				<textarea id="manual-input"></textarea>
 			</div>
 		</div>
+		<div class="start-btn" style="display:absolute;top:100px;font-size:40px;left:50vw;margin-left:-5vw;width:5vw">Start</div>
 	</body>
 </html>
