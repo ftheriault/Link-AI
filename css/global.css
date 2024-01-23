@@ -87,3 +87,25 @@ a {
 	bottom:10px;
 	color:#888;
 }
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
+.start-btn {
+	cursor:pointer;
+	position:absolute;
+	top:40vh;
+	font-size:40px;
+	left:50vw;
+	margin-left:-100px;
+	width:200px;
+	background-color:#bbb;
+	text-align:center;
+	padding:10px;
+	border-radius:5%;
+	border:2px solid white;
+    opacity: 1;
+    animation: fade 2s ease-in-out infinite forwards;
+}
